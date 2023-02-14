@@ -35,7 +35,9 @@ public class Panel extends JPanel {
     protected void  paintComponent(Graphics g){
         super.paintComponent(g);
 
-        character.draw(g);
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.drawImage();
 
 
         repaint();
