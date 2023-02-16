@@ -13,14 +13,20 @@ public class Character {
 
 
     public Character(){
-        front1 = ImageIO.read(getClass().getResourceAsStream("front1"));
-
+        try {
+            front1 = ImageIO.read(getClass().getResourceAsStream("character/front1.png"));
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
     }
 
 
-public void draw(Graphics g, JPanel panel){
+public void draw(Graphics g){
 
-   g.drawImage(front1, 10, 20, panel)
+   Graphics2D g2 = (Graphics2D) g;
+   g2.drawImage(front1, 0, 0, null);
 
 
 }
