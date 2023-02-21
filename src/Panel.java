@@ -9,7 +9,7 @@ public class Panel extends JPanel {
    Character character = new Character();
 
     public Panel(){
-        setBackground(Color.BLACK);
+        setBackground(Color.gray);
 
         this.setFocusable(true);
         this.addKeyListener(new KeyListener() {
