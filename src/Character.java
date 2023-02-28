@@ -5,16 +5,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 public class Character {
-    int x, y;
+    int x = 0;
+    int y = 0;
 
-    Rectangle rectangle = new Rectangle(10, 10, 87, 158);
-    BufferedImage front1;
-    //Image front2 = new Image("character/front2.png");
-
-
+    boolean steps = true;
+    BufferedImage character;
     public Character(){
         try {
-            front1 = ImageIO.read(getClass().getResourceAsStream("character/front1.png"));
+            character = ImageIO.read(getClass().getResourceAsStream("character/front1.png"));
         }
         catch(Exception e){
             System.out.println(e.toString());
@@ -26,22 +24,80 @@ public class Character {
 public void draw(Graphics g){
 
    Graphics2D g2 = (Graphics2D) g;
-   g2.drawImage(front1, 0, 0, null);
-
+   g2.drawImage(character, x, y, null);
 
 }
-
-
-    public void move(){
-
-
+    public void moveUp(){
+        y -= 10;
         try {
-            Thread.sleep(10);
+            if (steps == true) {
+                character = ImageIO.read(getClass().getResourceAsStream("character/back1.png"));
+                steps = false;
+            }
+            else{
+                character = ImageIO.read(getClass().getResourceAsStream("character/back2.png"));
+                steps = true;
+            }
         }
         catch(Exception e){
-
+            System.out.println(e.toString());
+            e.printStackTrace();
         }
-
     }
+
+    public void moveDown(){
+        y += 10;
+        try {
+            if (steps == true) {
+                character = ImageIO.read(getClass().getResourceAsStream("character/front1.png"));
+                steps = false;
+            }
+            else{
+                character = ImageIO.read(getClass().getResourceAsStream("character/front2.png"));
+                steps = true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    public void moveLeft(){
+        x -= 10;
+        try {
+            if (steps == true) {
+                character = ImageIO.read(getClass().getResourceAsStream("character/left1.png"));
+                steps = false;
+            }
+            else{
+                character = ImageIO.read(getClass().getResourceAsStream("character/left2.png"));
+                steps = true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    public void moveRight(){
+        x += 10;
+        try {
+            if (steps == true) {
+                character = ImageIO.read(getClass().getResourceAsStream("character/right1.png"));
+                steps = false;
+            }
+            else{
+                character = ImageIO.read(getClass().getResourceAsStream("character/right2.png"));
+                steps = true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+
 
 }

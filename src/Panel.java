@@ -21,6 +21,20 @@ public class Panel extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println(e.getKeyCode());
+
+                if (e.getKeyCode() == 38 || e.getKeyCode() == 87){
+                    character.moveUp();
+                }
+                if (e.getKeyCode() == 40 || e.getKeyCode() == 83){
+                    character.moveDown();
+                }
+                if (e.getKeyCode() == 37 || e.getKeyCode() == 65){
+                    character.moveLeft();
+                }
+                if (e.getKeyCode() == 39 || e.getKeyCode() == 68){
+                    character.moveRight();
+                }
+
             }
 
             @Override
