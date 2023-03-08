@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 public class Panel extends JPanel {
 
    Character character = new Character();
+   Grades grades = new Grades(this);
 
     public Panel(){
         setBackground(Color.gray);
@@ -50,6 +51,7 @@ public class Panel extends JPanel {
         super.paintComponent(g);
 
         character.draw(g);
+        grades.draw(g);
 
         repaint();
     }
