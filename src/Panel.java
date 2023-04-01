@@ -1,19 +1,26 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Panel extends JPanel {
 
-   Character character = new Character();
-   Grades grades = new Grades(this);
+    private BufferedImage background;
+    private Character character = new Character(this);
+    private ArrayList <Items> items = new ArrayList<Items>();
+    private static int amountOfItems = 6;
+
 
     public Panel(){
-        setBackground(Color.gray);
 
-        this.setFocusable(true);
-        this.addKeyListener(new KeyListener() {
+        setBackground(Color.GREEN);
+
+        setFocusable(true);
+        addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
 
@@ -21,8 +28,6 @@ public class Panel extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
-
                 if (e.getKeyCode() == 38 || e.getKeyCode() == 87){
                     character.moveUp();
                 }
@@ -35,7 +40,6 @@ public class Panel extends JPanel {
                 if (e.getKeyCode() == 39 || e.getKeyCode() == 68){
                     character.moveRight();
                 }
-
             }
 
             @Override
@@ -44,15 +48,56 @@ public class Panel extends JPanel {
             }
         }
     );
+
+    for(int i = 0; i < amountOfItems; i++){
+
+        if (i != 3) {
+            items.add(new Comets(this));
+        }
+        else{
+            items.add(new Star(this));
+        }
+    }
+
+        try{
+            background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("background/background.jpg")));
+        } catch(Exception e){
+
+        }
     }
 
     @Override
-    protected void  paintComponent(Graphics g){
+    protected void  paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
-        grades.draw(g);
+
+     for(int i = 0; i < items.size(); i++) {
+         System.out.println(items.get(i).getStatus());
+         items.get(i).moveItem();
+         items.get(i).drawItem(g);
+
+         if (!items.get(i).getStatus()) {
+             if (items.get(i).getY() > this.getHeight()) {
+                 items.set(i, new Comets(this));
+             }
+         }
+         else if (items.get(i).isTouch(character)){
+             items.set(i, new Star(this));
+             System.out.println("Touch!");
+         }
+
+     }
+
+        try{
+            Thread.sleep(10);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
 
         repaint();
     }
+
 }
