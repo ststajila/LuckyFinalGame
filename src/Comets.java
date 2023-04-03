@@ -17,6 +17,7 @@ public class Comets extends Items{
 
         try{
             cometImg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("comets/comet.png")));
+            resize(cometImg, width, height);
         } catch(Exception e){
 
         }
@@ -27,7 +28,7 @@ public class Comets extends Items{
     @Override
     public void drawItem(Graphics g){
         g.setClip(new Rectangle(getX(), getY(), width, height));
-        g.drawImage(cometImg, getX(), getY(), width, height, null);
+        g.drawImage(cometImg, getX(), getY(), null);
     }
 
     public void moveItem(){
