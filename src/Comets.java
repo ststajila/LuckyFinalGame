@@ -32,6 +32,7 @@ public class Comets extends Items{
     }
 
     public void moveItem(){
+
         setY(getY() + ySpeed);
     }
 

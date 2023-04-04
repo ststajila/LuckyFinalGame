@@ -27,7 +27,7 @@ abstract public class Items {
             return status;
     }
         public void setY(int value){
-            y += value;
+            y = value;
     }
 
         public abstract void drawItem(Graphics g);

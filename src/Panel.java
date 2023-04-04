@@ -51,12 +51,12 @@ public class Panel extends JPanel {
 
     for(int i = 0; i < amountOfItems; i++){
 
-        if (i != (int)(Math.random()*amountOfItems)) {
+        //if (i != (int)(Math.random()*amountOfItems)) {
             items.add(new Comets(this));
-        }
-        else{
+        //}
+        //else{
             items.add(new Star(this));
-        }
+        //}
     }
 
         try{
