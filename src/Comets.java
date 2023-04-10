@@ -8,7 +8,7 @@ public class Comets extends Items{
 
     private BufferedImage cometImg;
     private int width = (int)(Math.random()*100)+30;
-    private int height = width * 3;;
+    private int height = width * 3;
     private int ySpeed;
 
     public Comets(JPanel panel){
@@ -28,7 +28,7 @@ public class Comets extends Items{
     @Override
     public void drawItem(Graphics g){
         g.setClip(new Rectangle(getX(), getY(), width, height));
-        g.drawImage(cometImg, getX(), getY(), null);
+        g.drawImage(cometImg, getX(), getY(), width, height,null);
     }
 
     public void moveItem(){
