@@ -10,7 +10,7 @@ public class Star extends Items {
     private int size = (int)(Math.random()*100)+50;
 
     public Star (Panel panel){
-        super(panel, true, (int)(Math.random() * (panel.getWidth()-100)), 0 );//(int)(Math.random()* (panel.getHeight()-100)));
+        super(panel, true, (int)(Math.random() * (panel.getWidth()-100)), (int)(Math.random()* (panel.getHeight()-100)));
 
         try{
             img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("stars/star.png")));

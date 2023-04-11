@@ -12,7 +12,9 @@ public class Panel extends JPanel {
     private BufferedImage background;
     private Character character = new Character(this);
     private ArrayList <Items> items = new ArrayList<Items>();
-    private static int amountOfItems = 6;
+    private static int amountOfItems = 5;
+    private int amountOfLives;
+    private int amountOfStars = 0;
 
 
     public Panel(){
@@ -65,39 +67,53 @@ public class Panel extends JPanel {
         } catch(Exception e){
 
         }
+
+        amountOfLives = 5;
     }
 
     @Override
     protected void  paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
 
-     for(int i = 0; i < items.size(); i++) {
-         items.get(i).moveItem();
-         items.get(i).drawItem(g);
+        for (int i = 0; i < items.size(); i++) {
+            items.get(i).moveItem();
+            items.get(i).drawItem(g);
 
-         if (!items.get(i).getStatus()) {
-             if (items.get(i).getY() > this.getHeight()) {
-                 items.set(i, new Comets(this));
-             }
-         }
-         else if (items.get(i).isTouch(character)){
-             items.set(i, new Star(this));
-             System.out.println("Touch!");
-         }
+            if (!items.get(i).getStatus()) {
+                if (items.get(i).isTouch(character)) {
+                    amountOfLives--;
+                    System.out.println("Amount Of Lives: " + amountOfLives);
+                    items.remove(i);
+                    items.add(new Comets(this));
+                    if (amountOfLives <= 0){
+                        break;
+                    }
+                } else if (items.get(i).getY() > this.getHeight()) {
+                    items.set(i, new Comets(this));
+                }
+            } else if (items.get(i).isTouch(character)) {
+                items.set(i, new Star(this));
+                amountOfStars++;
+                System.out.println("Amount of stars: " + amountOfStars);
+            }
 
-     }
-
-        try{
-            Thread.sleep(10);
         }
-        catch(Exception e){
+
+        try {
+            Thread.sleep(10);
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
 
-        repaint();
+        if (amountOfLives > 0) {
+            repaint();
+        }
+        else{
+            System.out.println("Done");
+        }
+
     }
 
 }
