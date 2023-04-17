@@ -7,7 +7,6 @@ import java.util.Objects;
 
 public class Character {
     private int x, y, height, width;
-
     private boolean steps = true;
     private BufferedImage character;
     private JPanel panel;
@@ -125,8 +124,6 @@ public void draw(Graphics g){
     public int getHeight(){
         return height;
     }
-
-
 
 
 }

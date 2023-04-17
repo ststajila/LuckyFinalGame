@@ -7,13 +7,15 @@ import java.util.Objects;
 public class Comets extends Items{
 
     private BufferedImage cometImg;
+    private int x;
+    private int y;
     private int width = (int)(Math.random()*100)+30;
     private int height = width * 3;
     private int ySpeed;
 
     public Comets(JPanel panel){
 
-        super(panel, false, (int)(Math.random()* panel.getWidth()-50), -90);
+        super(panel, false);
 
         try{
             cometImg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("comets/comet.png")));
@@ -21,32 +23,40 @@ public class Comets extends Items{
         } catch(Exception e){
 
         }
+
+        if(panel.getWidth() != 0){
+            x = (int)(Math.random() * (panel.getWidth()-width));
+            y = -1 * height;
+        }
+        else {
+            x = (int)(Math.random() * (1080 - width));
+            y = -1 * height;
+        }
+
         ySpeed = (int)(Math.random()*3)+1;
 
     }
 
     @Override
     public void drawItem(Graphics g){
-        g.setClip(new Rectangle(getX(), getY(), width, height));
-        g.drawImage(cometImg, getX(), getY(), width, height,null);
+        g.setClip(new Rectangle(x, y, width, height));
+        g.drawImage(cometImg, x, y, width, height,null);
     }
 
     public void moveItem(){
-
-        setY(getY() + ySpeed);
+        y += ySpeed;
     }
 
-    public int getWidth(){
-        return width;
+    public int getX(){
+        return x;
     }
-
-    public int getHeight(){
-        return height;
+    public int getY(){
+        return y;
     }
 
     @Override
     public boolean isTouch(Character character) {
-        return getX() < character.getX() + character.getWidth() && getX() + width > character.getX() && getY() + height - width < character.getY() + character.getHeight() && getY() + height > character.getY();
+        return x < character.getX() + character.getWidth() && x + width > character.getX() && y + height - width < character.getY() + character.getHeight() && y + height > character.getY();
     }
 
 
