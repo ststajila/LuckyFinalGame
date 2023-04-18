@@ -15,11 +15,10 @@ public class Star extends Items {
 
         try{
             img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("stars/star.png")));
+            img = resize(img, size, size);
         } catch (Exception e){
 
         }
-
-        img = resize(img, size, size);
 
         if(panel.getWidth() != 0){
            x = (int)(Math.random() * (panel.getWidth()-size));

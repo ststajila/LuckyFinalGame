@@ -11,6 +11,8 @@ public class Panel extends JPanel {
 
     private BufferedImage background;
     private Character character = new Character(this);
+
+    private Spaceship spaceship = new Spaceship(this);
     private ArrayList <Items> items = new ArrayList<Items>();
     private static int amountOfItems = 5;
     private int amountOfLives;

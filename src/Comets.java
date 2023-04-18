@@ -19,7 +19,7 @@ public class Comets extends Items{
 
         try{
             cometImg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("comets/comet.png")));
-            resize(cometImg, width, height);
+            cometImg = resize(cometImg, width, height);
         } catch(Exception e){
 
         }
