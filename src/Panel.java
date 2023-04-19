@@ -12,61 +12,60 @@ public class Panel extends JPanel {
     private BufferedImage background;
     private Character character = new Character(this);
 
-    private Spaceship spaceship = new Spaceship(this);
-    private ArrayList <Items> items = new ArrayList<Items>();
+    private Spaceship spaceship;
+    private ArrayList<Items> items = new ArrayList<Items>();
     private static int amountOfItems = 5;
     private int amountOfLives;
     private int amountOfStars = 0;
 
 
-    public Panel(){
+    public Panel() {
 
         setBackground(Color.GREEN);
 
         setFocusable(true);
         addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
+                           @Override
+                           public void keyTyped(KeyEvent e) {
 
-            }
+                           }
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == 38 || e.getKeyCode() == 87){
-                    character.moveUp();
-                }
-                if (e.getKeyCode() == 40 || e.getKeyCode() == 83){
-                    character.moveDown();
-                }
-                if (e.getKeyCode() == 37 || e.getKeyCode() == 65){
-                    character.moveLeft();
-                }
-                if (e.getKeyCode() == 39 || e.getKeyCode() == 68){
-                    character.moveRight();
-                }
-            }
+                           @Override
+                           public void keyPressed(KeyEvent e) {
+                               if (e.getKeyCode() == 38 || e.getKeyCode() == 87) {
+                                   character.moveUp();
+                               }
+                               if (e.getKeyCode() == 40 || e.getKeyCode() == 83) {
+                                   character.moveDown();
+                               }
+                               if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
+                                   character.moveLeft();
+                               }
+                               if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
+                                   character.moveRight();
+                               }
+                           }
 
-            @Override
-            public void keyReleased(KeyEvent e) {
+                           @Override
+                           public void keyReleased(KeyEvent e) {
 
+                           }
+                       }
+        );
+
+        int starPosition = (int) (Math.random() * amountOfItems);
+        for (int i = 0; i < amountOfItems; i++) {
+
+            if (i != starPosition) {
+                items.add(new Comets(this));
+            } else {
+                items.add(new Star(this));
             }
         }
-    );
 
-    int starPosition = (int)(Math.random()*amountOfItems);
-        for(int i = 0; i < amountOfItems; i++){
-
-        if (i != starPosition) {
-            items.add(new Comets(this));
-        }
-        else{
-            items.add(new Star(this));
-        }
-    }
-
-        try{
+        try {
             background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("background/background.jpg")));
-        } catch(Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -74,7 +73,7 @@ public class Panel extends JPanel {
     }
 
     @Override
-    protected void  paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
@@ -89,7 +88,7 @@ public class Panel extends JPanel {
                     System.out.println("Amount Of Lives: " + amountOfLives);
                     items.remove(i);
                     items.add(new Comets(this));
-                    if (amountOfLives <= 0){
+                    if (amountOfLives <= 0) {
                         break;
                     }
                 } else if (items.get(i).getY() > this.getHeight()) {
@@ -99,6 +98,15 @@ public class Panel extends JPanel {
                 items.set(i, new Star(this));
                 amountOfStars++;
                 System.out.println("Amount of stars: " + amountOfStars);
+            }
+
+            if (amountOfStars == 1) {
+                spaceship = new Spaceship(this);
+                spaceship.draw(g);
+                if (spaceship.getX() < this.getWidth()) {
+                    spaceship.move();
+                } else spaceship = null;
+
             }
 
         }
@@ -111,11 +119,9 @@ public class Panel extends JPanel {
 
         if (amountOfLives > 0) {
             repaint();
-        }
-        else{
+        } else {
             System.out.println("Done");
         }
 
     }
-
 }

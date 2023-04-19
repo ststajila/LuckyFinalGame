@@ -15,8 +15,7 @@ public class Spaceship{
 
     public Spaceship(JPanel panel){
         try{
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("spaceship/spacecraft.png")));
-            image = resize(image, length, height);
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("comets/left.png")));
         } catch(Exception e){
 
         }
@@ -26,14 +25,13 @@ public class Spaceship{
 
     }
 
-    public void drawItem(Graphics g){
+    public void draw(Graphics g){
         g.setClip(new Rectangle(x, y, length, height));
         g.drawImage(image, x, y, length, height,null);
     }
 
-    public void  move(JPanel panel){
-        x += xSpeed;
-        y += ySpeed;
+    public void move(){
+            x += xSpeed;
     }
 
     public boolean isTouch(Character character) {
