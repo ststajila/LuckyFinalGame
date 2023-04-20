@@ -15,7 +15,6 @@ public class Star extends Items {
 
         try{
             img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("stars/star.png")));
-            img = resize(img, size, size);
         } catch (Exception e){
 
         }
@@ -33,7 +32,7 @@ public class Star extends Items {
     @Override
     public void drawItem(Graphics g){
         g.setClip(new Rectangle(x, y, size, size));
-        g.drawImage(img, x, y, null);
+        g.drawImage(img, x, y, size, size, null);
     }
 
     @Override

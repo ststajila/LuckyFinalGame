@@ -10,18 +10,18 @@ public class Spaceship{
     private int y;
     private int xSpeed = (int)(Math.random()*3)+1;
     private int ySpeed = (int)(Math.random()*3)+1;
-    private int height = 50;
-    private int length = height * 3;
+    private int height = 180;
+    private int length = 200;
 
     public Spaceship(JPanel panel){
         try{
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("comets/left.png")));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("spaceship/spaceship.png")));
         } catch(Exception e){
 
         }
 
         x = -1 * length;
-        y =(int)(Math.random() * (panel.getHeight()-height));
+        y =(int)(Math.random() * panel.getHeight());
 
     }
 
@@ -30,8 +30,8 @@ public class Spaceship{
         g.drawImage(image, x, y, length, height,null);
     }
 
-    public void move(){
-            x += xSpeed;
+    public void move(JPanel panel){
+            x = x + xSpeed;
     }
 
     public boolean isTouch(Character character) {
@@ -39,18 +39,6 @@ public class Spaceship{
                 x + length > character.getX() &&
                 y < character.getY() + character.getHeight() &&
                 y + height > character.getY();
-    }
-
-    public BufferedImage resize(BufferedImage img, int newW, int newH) {
-        int w = img.getWidth();
-        int h = img.getHeight();
-        BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
-        Graphics2D g = dimg.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
-        g.dispose();
-        return dimg;
     }
 
     public int getX(){

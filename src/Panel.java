@@ -12,11 +12,12 @@ public class Panel extends JPanel {
     private BufferedImage background;
     private Character character = new Character(this);
 
-    private Spaceship spaceship;
+    private Spaceship spaceship = new Spaceship(this);
     private ArrayList<Items> items = new ArrayList<Items>();
     private static int amountOfItems = 5;
-    private int amountOfLives;
+    private int amountOfLives = 5;
     private int amountOfStars = 0;
+    private boolean spaceshipStatus = false;
 
 
     public Panel() {
@@ -69,7 +70,6 @@ public class Panel extends JPanel {
 
         }
 
-        amountOfLives = 5;
     }
 
     @Override
@@ -77,6 +77,8 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
+
+
 
         for (int i = 0; i < items.size(); i++) {
             items.get(i).moveItem();
@@ -100,16 +102,22 @@ public class Panel extends JPanel {
                 System.out.println("Amount of stars: " + amountOfStars);
             }
 
-            if (amountOfStars == 1) {
-                spaceship = new Spaceship(this);
-                spaceship.draw(g);
-                if (spaceship.getX() < this.getWidth()) {
-                    spaceship.move();
-                } else spaceship = null;
 
             }
 
+        if (amountOfStars % 5 == 0 && amountOfStars != 0){
+            spaceship.draw(g);
+            spaceshipStatus = true;
         }
+
+        if (spaceship.getX() < getWidth() && !spaceshipStatus){
+            spaceship.move(this);
+        }
+        else{
+            spaceship = null;
+            spaceshipStatus = false;
+        }
+
 
         try {
             Thread.sleep(10);
@@ -122,6 +130,7 @@ public class Panel extends JPanel {
         } else {
             System.out.println("Done");
         }
+
 
     }
 }
