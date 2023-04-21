@@ -8,8 +8,7 @@ public class Spaceship{
     private BufferedImage image;
     private int x;
     private int y;
-    private int xSpeed = (int)(Math.random()*3)+1;
-    private int ySpeed = (int)(Math.random()*3)+1;
+    private int xSpeed = (int)(Math.random()*5)+1;
     private int height = 180;
     private int length = 200;
 
@@ -20,8 +19,8 @@ public class Spaceship{
 
         }
 
-        x = -1 * length;
-        y =(int)(Math.random() * panel.getHeight());
+        x = -1 * length - 10;
+        y =(int)(Math.random() * (panel.getHeight() - height));
 
     }
 
