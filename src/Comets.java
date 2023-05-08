@@ -25,11 +25,11 @@ public class Comets extends Items{
 
         if(panel.getWidth() != 0){
             x = (int)(Math.random() * (panel.getWidth()-width));
-            y = -1 * height;
+            y = -2 * height;
         }
         else {
             x = (int)(Math.random() * (1080 - width));
-            y = -1 * height;
+            y = -2 * height;
         }
 
         ySpeed = (int)(Math.random()*3)+1;

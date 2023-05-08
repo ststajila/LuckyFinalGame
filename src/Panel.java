@@ -23,7 +23,6 @@ public class Panel extends JPanel {
     public Panel() {
 
         setBackground(Color.GREEN);
-
         setFocusable(true);
         addKeyListener(new KeyListener() {
                            @Override
@@ -75,6 +74,7 @@ public class Panel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
 
@@ -131,7 +131,6 @@ public class Panel extends JPanel {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-
 
         if (amountOfLives > 0 && !spaceship.isTouch(character)) {
             repaint();
