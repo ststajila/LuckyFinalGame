@@ -16,7 +16,7 @@ public class Panel extends JPanel {
     private ArrayList<Items> items = new ArrayList<Items>();
     private static int amountOfItems = 5;
     private int amountOfLives = 5;
-    private int amountOfStars = 1;
+    private int amountOfStars = 0;
     private boolean spaceshipStatus = false;
 
 
@@ -87,10 +87,12 @@ public class Panel extends JPanel {
             if (!items.get(i).getStatus()) {
                 if (items.get(i).isTouch(character)) {
                     amountOfLives--;
+                    Main.label.setText(toString());
                     System.out.println("Amount Of Lives: " + amountOfLives);
                     items.remove(i);
                     items.add(new Comets(this));
                     if (amountOfLives <= 0) {
+                        Main.label.setText(toString());
                         break;
                     }
                 } else if (items.get(i).getY() > this.getHeight()) {
@@ -99,13 +101,14 @@ public class Panel extends JPanel {
             } else if (items.get(i).isTouch(character)) {
                 items.set(i, new Star(this));
                 amountOfStars++;
+                Main.label.setText(toString());
                 System.out.println("Amount of stars: " + amountOfStars);
             }
 
 
             }
 
-        if (amountOfStars % 5 == 0 && !spaceshipStatus){
+        if (amountOfStars != 0 && amountOfStars % 5 == 0 && !spaceshipStatus){
             spaceship = new Spaceship(this);
             System.out.println("Created");
             spaceshipStatus = true;
@@ -140,6 +143,9 @@ public class Panel extends JPanel {
             System.out.println("Done");
         }
 
+    }
 
+    public String toString(){
+        return "Amount of lives: " + amountOfLives + "   Amount of stars: " + amountOfStars;
     }
 }
