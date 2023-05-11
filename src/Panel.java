@@ -18,6 +18,7 @@ public class Panel extends JPanel {
     private int amountOfLives = 5;
     private int amountOfStars = 0;
     private boolean spaceshipStatus = false;
+    private boolean status = false;
 
 
     public Panel() {
@@ -139,6 +140,7 @@ public class Panel extends JPanel {
             repaint();
         } else if (spaceship.isTouch(character)){
             System.out.println("You won!");
+            status = true;
         } else {
             System.out.println("Done");
         }
@@ -146,6 +148,6 @@ public class Panel extends JPanel {
     }
 
     public String toString(){
-        return "Amount of lives: " + amountOfLives + "   Amount of stars: " + amountOfStars;
+            return "Amount of lives: " + amountOfLives + "   Amount of stars: " + amountOfStars;
     }
 }
