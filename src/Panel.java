@@ -10,6 +10,8 @@ import java.util.Objects;
 public class Panel extends JPanel {
 
     private BufferedImage background;
+    private BufferedImage win;
+    private BufferedImage lose;
     private Character character = new Character(this);
 
     private Spaceship spaceship = new Spaceship(this);
@@ -67,6 +69,13 @@ public class Panel extends JPanel {
         try {
             background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("background/background.jpg")));
         } catch (Exception e) {
+
+        }
+
+        try {
+            win = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("background/won.jpeg")));
+            lose = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("background/lose.jpeg")));
+        } catch (Exception e){
 
         }
 
@@ -140,9 +149,13 @@ public class Panel extends JPanel {
             repaint();
         } else if (spaceship.isTouch(character)){
             System.out.println("You won!");
+            g.setClip(0, 0, this.getWidth(), this.getHeight());
+            g.drawImage(win, 0, 0, this.getWidth(), this.getHeight(), null);
             status = true;
         } else {
             System.out.println("Done");
+            g.setClip(0, 0, this.getWidth(), this.getHeight());
+            g.drawImage(lose, 0, 0, this.getWidth(), this.getHeight(), null);
         }
 
     }
