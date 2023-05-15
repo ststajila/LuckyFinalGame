@@ -8,7 +8,7 @@ public class Spaceship{
     private BufferedImage image;
     private int x;
     private int y;
-    private int xSpeed = (int)(Math.random()*5)+1;
+    private int xSpeed = (int)(Math.random()*10)+1;
     private int height = 180;
     private int length = 200;
 

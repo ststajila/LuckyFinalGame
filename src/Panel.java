@@ -16,7 +16,7 @@ public class Panel extends JPanel {
 
     private Spaceship spaceship = new Spaceship(this);
     private ArrayList<Items> items = new ArrayList<Items>();
-    private static int amountOfItems = 5;
+    private static int amountOfItems = 10;
     private int amountOfLives = 5;
     private int amountOfStars = 0;
     private boolean spaceshipStatus = false;
@@ -118,7 +118,7 @@ public class Panel extends JPanel {
 
             }
 
-        if (amountOfStars != 0 && amountOfStars % 5 == 0 && !spaceshipStatus){
+        if (amountOfStars != 0 && amountOfStars % 1 == 0 && !spaceshipStatus){
             spaceship = new Spaceship(this);
             System.out.println("Created");
             spaceshipStatus = true;
@@ -145,7 +145,8 @@ public class Panel extends JPanel {
             System.out.println(e.toString());
         }
 
-        if (amountOfLives > 0 && !spaceship.isTouch(character)) {
+
+        if (amountOfLives > 0 && (spaceship == null || !spaceship.isTouch(character))) {
             repaint();
         } else if (spaceship.isTouch(character)){
             System.out.println("You won!");
