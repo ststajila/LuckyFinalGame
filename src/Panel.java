@@ -19,8 +19,10 @@ public class Panel extends JPanel {
     private static int amountOfItems = 10;
     private int amountOfLives = 5;
     private int amountOfStars = 0;
+    private int temp = 0;
     private boolean spaceshipStatus = false;
     private boolean status = false;
+
 
 
     public Panel() {
@@ -118,7 +120,9 @@ public class Panel extends JPanel {
 
             }
 
-        if (amountOfStars != 0 && amountOfStars % 1 == 0 && !spaceshipStatus){
+
+        if (amountOfStars != 0 && amountOfStars > temp && amountOfStars % 10 == 0 && !spaceshipStatus){
+            temp = amountOfStars;
             spaceship = new Spaceship(this);
             System.out.println("Created");
             spaceshipStatus = true;
