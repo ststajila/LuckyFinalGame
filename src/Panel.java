@@ -29,6 +29,7 @@ public class Panel extends JPanel {
 
         setBackground(Color.GREEN);
         setFocusable(true);
+       
         addKeyListener(new KeyListener() {
                            @Override
                            public void keyTyped(KeyEvent e) {
@@ -90,9 +91,8 @@ public class Panel extends JPanel {
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         character.draw(g);
 
-
-
         for (int i = 0; i < items.size(); i++) {
+
             items.get(i).moveItem();
             items.get(i).drawItem(g);
 
