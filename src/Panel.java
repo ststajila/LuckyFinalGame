@@ -29,7 +29,7 @@ public class Panel extends JPanel {
 
         setBackground(Color.GREEN);
         setFocusable(true);
-       
+
         addKeyListener(new KeyListener() {
                            @Override
                            public void keyTyped(KeyEvent e) {
@@ -118,7 +118,7 @@ public class Panel extends JPanel {
             }
 
 
-            }
+        }
 
 
         if (amountOfStars != 0 && amountOfStars > temp && amountOfStars % 10 == 0 && !spaceshipStatus){
@@ -152,7 +152,7 @@ public class Panel extends JPanel {
 
         if (amountOfLives > 0 && (spaceship == null || !spaceship.isTouch(character))) {
             repaint();
-        } else if (spaceship.isTouch(character)){
+        } else if (spaceship != null && spaceship.isTouch(character)){
             System.out.println("You won!");
             g.setClip(0, 0, this.getWidth(), this.getHeight());
             g.drawImage(win, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -166,6 +166,6 @@ public class Panel extends JPanel {
     }
 
     public String toString(){
-            return "Amount of lives: " + amountOfLives + "   Amount of stars: " + amountOfStars;
+        return "Amount of lives: " + amountOfLives + "   Amount of stars: " + amountOfStars;
     }
 }
